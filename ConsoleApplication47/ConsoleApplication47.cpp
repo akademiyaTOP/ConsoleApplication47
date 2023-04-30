@@ -79,6 +79,21 @@ public:
         delete current;
         count--;
     }
+    T pop() {
+        if (count < 0) return NULL;
+        node<T>* current = head;
+        node<T>* pred = nullptr;
+        while (current != tail) {
+            pred = current;
+            current = current->next;
+        }
+        pred->next = nullptr;
+        tail = pred;
+        T buf = current->value;
+        delete current;
+        count--;
+        return buf;
+    }
 };
 
 int main()
@@ -94,14 +109,17 @@ int main()
     cout << lst[0] << " " << lst[2] << endl;
     List<int> lst2{ 4,6,8,10,30};
     lst2.print();
-    lst2.del(2);
+    cout << lst2.pop() << endl;
+    cout << lst2.pop() << endl;
+    cout << lst2.pop() << endl;
     lst2.print();
-    lst2.del(0);
-    lst2.del(2);
-    lst2.print();
-    cout << lst2.size();
-    list<int> lst3{ 4,6,8,10,30 };
-    for (auto& item : lst3) 
+    cout << lst2.size() << endl;
+    list<int> lst4{ 5, 8, 9, 3, 2, 1, 0, 4, 6, 7 };
+    for (auto& item : lst4)
+        cout << item << " ";
+    cout << endl;
+    lst4.sort();
+    for (auto& item : lst4)
         cout << item << " ";
     cout << endl;
 }
